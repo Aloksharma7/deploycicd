@@ -28,8 +28,10 @@ jobs:
           FTP_USERNAME: ${{ secrets.CPANEL_USERNAME }}
           FTP_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
-          lftp -c "
+          lftp -e "
+          set ssl:verify-certificate false
           open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST;
           mirror --reverse --delete --verbose ./ /home/tcssoftt/testing.tcssofttech.com;
           bye
           "
+
