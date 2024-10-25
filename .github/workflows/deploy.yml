@@ -16,7 +16,13 @@ jobs:
       - name: Install LFTP
         run: sudo apt-get install -y lftp
 
-      - name: Deploy to cPanel
+      - name: Debug Connection Variables
+        run: |
+          echo "FTP_HOST=${{ secrets.CPANEL_HOST }}"
+          echo "FTP_USERNAME=${{ secrets.CPANEL_USERNAME }}"
+          echo "FTP_PASSWORD is set" 
+
+      - name: Deploy
         env:
           FTP_HOST: ${{ secrets.CPANEL_HOST }}
           FTP_USERNAME: ${{ secrets.CPANEL_USERNAME }}
